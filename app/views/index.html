@@ -1,8 +1,31 @@
 <html>
   <head>
+  	<title>Add Courses</title>
     <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
   </head>
   <body>
-    The best place to start is the "WelcomeController.py" file in app/controllers.
+	<h2>Add a new course</h2>
+	<form action="/add_course" method="POST">
+		Name: <input type="text" name="name">
+		Description: <input type="text" name="description">
+		<input type="submit" name="add" value="Add">
+	</form>
+	<h2>Courses</h2>
+		<table>
+			<tr>
+				<th>Course Name</th>
+				<th>Description</th>
+				<th>Date Added</th>
+				<th>Actions</th>
+			</tr>
+			{% for course in all_courses %}
+			<tr>
+				<td>{{ course['name'] }}</td>
+				<td>{{ course['description'] }}</td>
+				<td>{{ course['created_at'] }}</td>
+				<td><a href="/remove/{{course['id']}}">remove</a></td>
+			</tr>
+			{% endfor %}
+		</table>
   </body>
 </html>
